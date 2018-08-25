@@ -20,7 +20,11 @@ class TestCase extends \PHPUnit_Framework_TestCase
 
     protected function addCommand($class)
     {
-        $this->application->add(new $class);
+        if (is_string($class)) {
+            $class = new $class;
+        }
+
+        $this->application->add($class);
         $commands = $this->application->all();
         return end($commands);
     }

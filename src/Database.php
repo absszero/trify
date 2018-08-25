@@ -7,6 +7,8 @@ class Database
 {
     const TABLE = 'tracks';
     const MYSQL = 'mysql:host=%s;port=%d;dbname=%s';
+    const UPDATE = 'UPDATE %s SET %s WHERE %s';
+    const INSERT = 'INSERT INTO %s(%s) VALUES(%s)';
     static public $instance;
     public static function instance()
     {
@@ -76,27 +78,37 @@ class Database
         return self::instance()->query($sql);
     }
 
-    public function save(array $data)
+    public function save(array $data, $id = null)
     {
-        $fileds = array_keys($data);
-        $values = array_fill(0, count($fileds), '?');
-        $fileds = implode(', ', $fileds);
-        $values = implode(', ', $values);
-        $sql = "INSERT INTO " . self::TABLE . " ($fileds) VALUES($values)";
+        $fields = array_keys($data);
+        if ($id) {
+            $data[] = $id;
+            $fields = implode(' = ?,', $fields) . ' = ?';
+            $sql = sprintf(self::UPDATE, self::TABLE, $fields, 'id = ?');
+        } else {
+            $values = array_fill(0, count($fields), '?');
+            $fields = implode(', ', $fields);
+            $values = implode(', ', $values);
+            $sql = sprintf(self::INSERT, self::TABLE, $fields, $values);
+        }
 
-        self::instance()->prepare($sql)
-        ->execute(array_values($data));
+        self::instance()->prepare($sql)->execute(array_values($data));
 
         return self::instance()->lastInsertId();
     }
 
-    public function select($fields = '*')
+    public function select($fields = '*', $style = null)
     {
         $fields = implode(', ', (array)$fields);
         $sth = self::instance()->prepare("SELECT $fields FROM " . self::TABLE);
         $sth->execute();
 
-        return $sth->fetchAll();
+        $data = $sth->fetchAll($style);
+        if ((PDO::FETCH_GROUP|PDO::FETCH_ASSOC) === $style) {
+            $data = array_map('reset', $data);
+        }
+
+        return $data;
     }
 
     public function delete($id)
