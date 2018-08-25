@@ -1,6 +1,7 @@
 <?php
 namespace Absszero\PSStore;
 
+use Absszero\PSStore\Database;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -16,7 +17,7 @@ class MigrationCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $sql = "CREATE TABLE IF NOT EXISTS prices (
+        $sql = "CREATE TABLE IF NOT EXISTS " . Database::TABLE . " (
   id int(11) NOT NULL AUTO_INCREMENT,
   title varchar(255) DEFAULT NULL,
   url varchar(2083) NOT NULL,

@@ -5,6 +5,7 @@ use PDO;
 
 class Database
 {
+    const TABLE = 'tracks';
     const MYSQL = 'mysql:host=%s;port=%d;dbname=%s';
     static public $instance;
     public static function instance()
@@ -39,9 +40,19 @@ class Database
         $values = array_fill(0, count($fileds), '?');
         $fileds = implode(', ', $fileds);
         $values = implode(', ', $values);
-        $sql = "INSERT INTO prices($fileds) VALUES($values)";
+        $sql = "INSERT INTO {self::TABLE} ($fileds) VALUES($values)";
 
         return self::instance()->prepare($sql)
         ->execute(array_values($data));
+    }
+
+    public function select($fields)
+    {
+        $fields = implode(', ', $fields);
+
+        $sth = self::instance()->prepare("SELECT $fields FROM " . self::TABLE);
+        $sth->execute();
+
+        return $sth->fetchAll();
     }
 }
