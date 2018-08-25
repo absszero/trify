@@ -7,6 +7,8 @@ use Symfony\Component\Console\Application;
 $application = new Application();
 
 $application->add(new Absszero\PSStore\MigrationCommand);
+$application->add(new Absszero\PSStore\Track\AddCommand);
+
 /*$application->add(new Absszero\PSStore\Notifier\Index);
 $application->add(new Absszero\PSStore\Notifier\Add);
 $application->add(new Absszero\PSStore\Notifier\Remove);*/

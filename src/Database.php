@@ -27,4 +27,21 @@ class Database
 
         return self::$instance;
     }
+
+    public function query($sql)
+    {
+        return self::instance()->query($sql);
+    }
+
+    public function save(array $data)
+    {
+        $fileds = array_keys($data);
+        $values = array_fill(0, count($fileds), '?');
+        $fileds = implode(', ', $fileds);
+        $values = implode(', ', $values);
+        $sql = "INSERT INTO prices($fileds) VALUES($values)";
+
+        return self::instance()->prepare($sql)
+        ->execute(array_values($data));
+    }
 }

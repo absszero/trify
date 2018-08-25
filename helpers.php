@@ -3,6 +3,6 @@
 if (!function_exists('db')) {
     function db()
     {
-        return Absszero\PSStore\Database::instance();
+        return new Absszero\PSStore\Database;
     }
 }
