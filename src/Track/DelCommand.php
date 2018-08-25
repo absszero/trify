@@ -28,3 +28,4 @@ class DelCommand extends Command
         }
     }
 }
+

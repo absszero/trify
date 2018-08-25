@@ -17,17 +17,23 @@ class MigrationCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $this->migrate();
+        $output->writeln('<info>Table created.</info>');
+    }
+
+    public function migrate()
+    {
         $sql = "CREATE TABLE IF NOT EXISTS " . Database::TABLE . " (
-  id int(11) NOT NULL AUTO_INCREMENT,
+  %s,
   title varchar(255) DEFAULT NULL,
   url varchar(2083) NOT NULL,
-  price int(10) unsigned DEFAULT NULL,
-  old_price int(10) unsigned DEFAULT NULL,
+  price int(10) DEFAULT NULL,
+  old_price int(10) DEFAULT NULL,
   created_at datetime DEFAULT NULL,
-  updated_at datetime DEFAULT NULL,
-  PRIMARY KEY (id)
+  updated_at datetime DEFAULT NULL
+  %s
 );";
+        $sql = db()->autoIncrement($sql);
         db()->query($sql);
-        $output->writeln('<info>Table created.</info>');
     }
 }

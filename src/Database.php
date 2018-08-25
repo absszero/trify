@@ -12,7 +12,7 @@ class Database
     {
         if (!self::$instance) {
             $config = require __DIR__ . '/../database.php';
-            $dsn = sprintf(self::MYSQL, $config['host'], $config['port'], $config['dbname']);
+            $dsn = self::getDSN($config);
             self::$instance = new PDO(
                 $dsn,
                 $config['username'],
@@ -29,6 +29,48 @@ class Database
         return self::$instance;
     }
 
+    public function close()
+    {
+        self::$instance = null;
+    }
+
+    public function autoIncrement($sql)
+    {
+        $driver = self::instance()->getAttribute(PDO::ATTR_DRIVER_NAME);
+        switch ($driver) {
+            case 'sqlite':
+                $sql = sprintf($sql, 'id INTEGER PRIMARY KEY', '');
+                break;
+            case 'mysql':
+                $sql = sprintf($sql, 'id int(11) NOT NULL AUTO_INCREMENT', ', PRIMARY KEY (id)');
+                break;
+
+            default:
+                // code...
+                break;
+        }
+
+        return $sql;
+    }
+
+    private static function getDSN(array $config)
+    {
+        switch ($config['type']) {
+            case 'mysql':
+                $dsn = sprintf(self::MYSQL, $config['host'], $config['port'], $config['dbname']);
+                break;
+            case 'sqlite':
+                $dsn = 'sqlite:' . $config['host'];
+                break;
+
+            default:
+                // code...
+                break;
+        }
+
+        return $dsn;
+    }
+
     public function query($sql)
     {
         return self::instance()->query($sql);
@@ -40,19 +82,26 @@ class Database
         $values = array_fill(0, count($fileds), '?');
         $fileds = implode(', ', $fileds);
         $values = implode(', ', $values);
-        $sql = "INSERT INTO {self::TABLE} ($fileds) VALUES($values)";
+        $sql = "INSERT INTO " . self::TABLE . " ($fileds) VALUES($values)";
 
-        return self::instance()->prepare($sql)
+        self::instance()->prepare($sql)
         ->execute(array_values($data));
+
+        return self::instance()->lastInsertId();
     }
 
-    public function select($fields)
+    public function select($fields = '*')
     {
-        $fields = implode(', ', $fields);
-
+        $fields = implode(', ', (array)$fields);
         $sth = self::instance()->prepare("SELECT $fields FROM " . self::TABLE);
         $sth->execute();
 
         return $sth->fetchAll();
+    }
+
+    public function delete($id)
+    {
+        $sth = self::instance()->prepare("DELETE FROM " . self::TABLE . " WHERE id = ?");
+        $sth->execute([$id]);
     }
 }
