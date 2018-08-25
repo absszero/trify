@@ -13,7 +13,7 @@ class AddCommand extends Command
         $this
         ->setName('track:add')
         ->setDescription('Add a url to track')
-        ->addArgument('url', InputArgument::REQUIRED, 'The tracking url');
+        ->addArgument('url', InputArgument::REQUIRED, 'The track url');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
