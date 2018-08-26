@@ -11,9 +11,6 @@ $application->add(new Absszero\PSStore\Track\AddCommand);
 $application->add(new Absszero\PSStore\Track\ListCommand);
 $application->add(new Absszero\PSStore\Track\DelCommand);
 $application->add(new Absszero\PSStore\Track\GoCommand);
-
-/*$application->add(new Absszero\PSStore\Notifier\Index);
-$application->add(new Absszero\PSStore\Notifier\Add);
-$application->add(new Absszero\PSStore\Notifier\Remove);*/
+$application->add(new Absszero\PSStore\TestMailCommand);
 
 $application->run();

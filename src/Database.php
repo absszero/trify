@@ -13,7 +13,7 @@ class Database
     public static function instance()
     {
         if (!self::$instance) {
-            $config = require __DIR__ . '/../database.php';
+            $config = require __DIR__ . '/../config/database.php';
             $dsn = self::getDSN($config);
             self::$instance = new PDO(
                 $dsn,

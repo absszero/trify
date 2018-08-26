@@ -36,18 +36,24 @@ class GoCommand extends Command
         $bodies = $this->crawler->request($urls);
         $data = \Absszero\PSStore\Parser::parse($bodies);
         $now = date('Y-m-d H:i:s');
+        $observer = new \Absszero\PSStore\Observer;
         foreach ($data as $url => $meta) {
             if (!$meta) {
                 continue;
             }
             $track = $tracks[$url];
+            $track['title'] = $meta->name;
+            $track['url'] = $url;
+            $track['updated_at'] = $now;
+            $track['old_price'] = $track['price'];
+            $track['price'] = $meta->offers[0]->price;
 
-            db()->save([
-                'title' => $meta->name,
-                'updated_at' => $now,
-                'old_price' => $track['price'],
-                'price' => $meta->offers[0]->price
-            ], $track['id']);
+            db()->save($track, $track['id']);
+
+            $observer->watch($track);
         }
+
+        $mail = new \Absszero\PSStore\Mail;
+        $mail->find($observer->tracks());
     }
 }

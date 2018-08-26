@@ -23,6 +23,6 @@
         </whitelist>
     </filter>
     <php>
-        <env name="DOT_ENV" value=".env.testing"/>
+        <env name="ENV_FILE" value=".env.testing"/>
     </php>
 </phpunit>

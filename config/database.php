@@ -1,7 +1,6 @@
 <?php
 
 return [
-    // required
     'type' => getenv('DB_TYPE'),
     'dbname' => getenv('DB_NAME'),
     'host' => getenv('DB_HOST'),
