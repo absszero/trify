@@ -38,7 +38,7 @@ Track and notify discount from PS Store
  ./psstore track:add https://store.playstation.com/zh-hant-tw/product/HP9000-CUSA07413_00-00000000GODOFWAR
 ```
 
-### List tracked
+### List tracks
 
 ```shell
  ./psstore track
@@ -63,6 +63,12 @@ Track and notify discount from PS Store
 
 ```shell
 ./psstore track:del 1
+```
+
+### Test email to yourself
+
+```shell
+./psstore mail:test
 ```
 
 
