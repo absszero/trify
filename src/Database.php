@@ -15,15 +15,20 @@ class Database
         if (!self::$instance) {
             $config = require __DIR__ . '/../config/database.php';
             $dsn = self::getDSN($config);
+
+            $options = [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            ];
+            if ('mysql' === $config['type']) {
+                $options[PDO::MYSQL_ATTR_INIT_COMMAND] = "SET NAMES utf8";
+            }
+
             self::$instance = new PDO(
                 $dsn,
                 $config['username'],
                 $config['password'],
-                [
-                    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
-                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                ]
+                $options
             );
         }
 
@@ -36,10 +41,14 @@ class Database
         self::$instance = null;
     }
 
+    public function driver()
+    {
+        return self::instance()->getAttribute(PDO::ATTR_DRIVER_NAME);
+    }
+
     public function autoIncrement($sql)
     {
-        $driver = self::instance()->getAttribute(PDO::ATTR_DRIVER_NAME);
-        switch ($driver) {
+        switch ($this->driver()) {
             case 'sqlite':
                 $sql = sprintf($sql, 'id INTEGER PRIMARY KEY', '');
                 break;
