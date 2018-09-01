@@ -10,7 +10,7 @@ Track and notify discount from PS Store
 
    ```ini
    DB_TYPE=sqlite
-   DB_NAME=./database.db
+   DB_NAME=absolute_path_to_database.db
 
    MAIL_HOST=smtp.gmail.com
    MAIL_PORT=587
