@@ -9,7 +9,7 @@ class ListCommandTest extends \Tests\TestCase
             'url' => 'http://example.com/list.html'
         ]);
 
-        $command = $this->addCommand('Absszero\PSStore\Track\ListCommand');
+        $command = $this->addCommand('Absszero\Trify\Track\ListCommand');
         $tester = $this->executeCommand($command);
 
         $track = db()->select()[0];

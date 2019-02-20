@@ -1,5 +1,5 @@
 <?php
-namespace Absszero\PSStore;
+namespace Absszero\Trify;
 
 use PDO;
 

@@ -1,5 +1,5 @@
 <?php
-namespace Absszero\PSStore\Track;
+namespace Absszero\Trify\Track;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -27,16 +27,16 @@ class GoCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         if (!$this->crawler) {
-            $this->crawler = new \Absszero\PSStore\Crawler;
+            $this->crawler = new \Absszero\Trify\Crawler;
         }
 
         $tracks = db()->select(['url', 'id', 'price'], \PDO::FETCH_GROUP|\PDO::FETCH_ASSOC);
         $urls = array_keys($tracks);
 
         $bodies = $this->crawler->request($urls);
-        $data = \Absszero\PSStore\Parser::parse($bodies);
+        $data = \Absszero\Trify\Parser::parse($bodies);
         $now = date('Y-m-d H:i:s');
-        $observer = new \Absszero\PSStore\Observer;
+        $observer = new \Absszero\Trify\Observer;
         foreach ($data as $url => $meta) {
             if (!$meta) {
                 continue;
@@ -53,7 +53,7 @@ class GoCommand extends Command
             $observer->watch($track);
         }
 
-        $mail = new \Absszero\PSStore\Mail;
+        $mail = new \Absszero\Trify\Mail;
         $mail->find($observer->tracks());
     }
 }

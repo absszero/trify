@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<?php
+require __DIR__ . '/boostrap.php';
+
+use Symfony\Component\Console\Application;
+
+$application = new Application();
+
+$application->add(new Absszero\Trify\MigrationCommand);
+$application->add(new Absszero\Trify\Track\AddCommand);
+$application->add(new Absszero\Trify\Track\ListCommand);
+$application->add(new Absszero\Trify\Track\DelCommand);
+$application->add(new Absszero\Trify\Track\GoCommand);
+$application->add(new Absszero\Trify\TestMailCommand);
+
+$application->run();

@@ -1,5 +1,5 @@
 <?php
-namespace Absszero\PSStore\Track;
+namespace Absszero\Trify\Track;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;

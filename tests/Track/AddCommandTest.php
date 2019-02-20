@@ -5,7 +5,7 @@ class AddCommandTest extends \Tests\TestCase
 {
     public function testAddTrack()
     {
-        $command = $this->addCommand('Absszero\PSStore\Track\AddCommand');
+        $command = $this->addCommand('Absszero\Trify\Track\AddCommand');
         $input = ['url' => 'http://example.com/add.html'];
         $this->executeCommand($command, $input);
         $track = db()->select()[0];

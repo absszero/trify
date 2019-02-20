@@ -10,7 +10,7 @@ Track and notify discount from PS Store
 
    ```ini
    DB_TYPE=sqlite
-   DB_NAME=absolute_path_to_database.db
+   DB_NAME=./database.db
 
    MAIL_HOST=smtp.gmail.com
    MAIL_PORT=587
@@ -38,14 +38,14 @@ Track and notify discount from PS Store
  ./psstore track:add https://store.playstation.com/zh-hant-tw/product/HP9000-CUSA07413_00-00000000GODOFWAR
 ```
 
-### List tracks
+### List tracked
 
 ```shell
  ./psstore track
   ---- ------------------------ ------- ----------- --------------------- --------------------- ---------------------------------------------------------------------------------------
   id   title                    price   old_price   updated_at            created_at            url
  ---- ------------------------ ------- ----------- --------------------- --------------------- ---------------------------------------------------------------------------------------
-  1                                                 2018-08-26 17:18:43   https://store.playstation.com/zh-hant-tw/product/HP9000-CUSA07413_00-00000000GODOFWAR
+  1                                      2018-08-26 17:18:43   https://store.playstation.com/zh-hant-tw/product/HP9000-CUSA07413_00-00000000GODOFWAR
 ```
 
 ### Track now
@@ -63,12 +63,6 @@ Track and notify discount from PS Store
 
 ```shell
 ./psstore track:del 1
-```
-
-### Test email to yourself
-
-```shell
-./psstore mail:test
 ```
 
 

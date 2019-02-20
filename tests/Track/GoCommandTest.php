@@ -1,7 +1,7 @@
 <?php
 namespace Tests\Track;
 
-use Absszero\PSStore\Crawler;
+use Absszero\Trify\Crawler;
 
 class GoCommandTest extends \Tests\TestCase
 {
@@ -14,7 +14,7 @@ class GoCommandTest extends \Tests\TestCase
         ]);
 
         $crawler = $this->mockCrawler($url, $price);
-        $command = $this->addCommand(new \Absszero\PSStore\Track\GoCommand($crawler));
+        $command = $this->addCommand(new \Absszero\Trify\Track\GoCommand($crawler));
         $tester = $this->executeCommand($command);
 
         $track = db()->select()[0];

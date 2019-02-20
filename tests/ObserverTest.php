@@ -12,7 +12,7 @@ class ObserverTest extends \Tests\TestCase
             'old_price' => null,
         ];
 
-        $observer = new \Absszero\PSStore\Observer;
+        $observer = new \Absszero\Trify\Observer;
 
         $observer->watch($track);
         $this->assertEmpty($observer->tracks());

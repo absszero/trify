@@ -44,7 +44,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
 
     protected function migrate()
     {
-        $command = new \Absszero\PSStore\MigrationCommand;
+        $command = new \Absszero\Trify\MigrationCommand;
         $command->migrate();
     }
 }

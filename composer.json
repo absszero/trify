@@ -1,6 +1,6 @@
 {
-    "name": "absszero/psstore",
-    "description": "Track and notify price from PS Store",
+    "name": "absszero/trify",
+    "description": "Track and notify prices",
     "type": "project",
     "require": {
         "symfony/console": "^3.4",
@@ -14,13 +14,12 @@
     },
     "authors": [
         {
-            "name": "absszero",
-            "email": "absszero@gmail.com"
+            "name": "absszero"
         }
     ],
     "autoload": {
         "psr-4": {
-            "Absszero\\PSStore\\": "src/"
+            "Absszero\\Trify\\": "src/"
         },
         "files": [
             "helpers.php"
@@ -35,7 +34,7 @@
         "preferred-install": "dist"
     },
     "bin": [
-        "psstore"
+        "trify"
     ],
     "scripts": {
         "post-root-package-install": [

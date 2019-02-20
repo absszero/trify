@@ -1,6 +1,6 @@
 <?php
 
-namespace Absszero\PSStore;
+namespace Absszero\Trify;
 
 class Parser
 {

@@ -1,7 +1,7 @@
 <?php
 namespace Tests\Track;
 
-use Absszero\PSStore\Parser;
+use Absszero\Trify\Parser;
 
 class ParserTest extends \Tests\TestCase
 {

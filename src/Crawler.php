@@ -1,6 +1,6 @@
 <?php
 
-namespace Absszero\PSStore;
+namespace Absszero\Trify;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise;

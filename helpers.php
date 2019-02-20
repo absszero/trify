@@ -3,6 +3,6 @@
 if (!function_exists('db')) {
     function db()
     {
-        return new Absszero\PSStore\Database;
+        return new Absszero\Trify\Database;
     }
 }

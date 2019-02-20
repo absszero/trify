@@ -9,7 +9,7 @@ class DelCommandTest extends \Tests\TestCase
             'url' => 'http://example.com/index.html'
         ]);
 
-        $command = $this->addCommand('Absszero\PSStore\Track\DelCommand');
+        $command = $this->addCommand('Absszero\Trify\Track\DelCommand');
         $tester = $this->executeCommand($command, ['id' => $id], function ($tester) {
             $tester->setInputs(array('yes'));
         });
