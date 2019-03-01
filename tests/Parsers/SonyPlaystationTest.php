@@ -12,7 +12,7 @@ class SonyPlaystationTest extends \Tests\TestCase
         $bodies = [$url => $this->body()];
         $bodies = (new Parser)->parse($bodies);
 
-        $this->assertEquals('《FIFA 19》終極版 PS Plus 同捆包 預購', $bodies[$url]->name);
+        $this->assertEquals('《FIFA 19》終極版 PS Plus 同捆包 預購', $bodies[$url]->title);
     }
 
     protected function body()

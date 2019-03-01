@@ -23,7 +23,7 @@ class Parser
     {
         foreach ($bodies as $url => $body) {
             $instance = $this->instance($url);
-            $bodies[$url] = $instance->parse($body);
+            $bodies[$url] = $instance->parse($url, $body);
         }
 
         return $bodies;

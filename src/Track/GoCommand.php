@@ -35,20 +35,12 @@ class GoCommand extends Command
         $urls = array_keys($tracks);
 
         $bodies = $this->crawler->request($urls);
-        $data = (new Parser)->parse($bodies);
-        $now = date('Y-m-d H:i:s');
+        $metas = (new Parser)->parse($bodies);
         $observer = new \Absszero\Trify\Observer;
-        foreach ($data as $url => $meta) {
-            if (!$meta) {
-                continue;
-            }
+        foreach ($metas as $url => $meta) {
             $track = $tracks[$url];
-            $track['title'] = $meta->name;
-            $track['url'] = $url;
-            $track['updated_at'] = $now;
             $track['old_price'] = $track['price'];
-            $track['price'] = $meta->offers[0]->price;
-
+            $track = array_merge($track, $meta->getData());
             db()->save($track, $track['id']);
 
             $observer->watch($track);
