@@ -5,7 +5,8 @@ namespace Absszero\Trify\Parsers;
 class Parser
 {
     const HOSTS = [
-        'store.playstation.com' => SonyPlaystation::class
+        'store.playstation.com' => SonyPlaystation::class,
+        'api-savecoins.nznweb.com.br' => Savecoins::class
     ];
 
     public function instance($url)
