@@ -1,6 +1,6 @@
-# PSStore
+# Trify
 
-Track and notify discount from PS Store
+Track and notify prices
 
 ## Installation
 
@@ -21,27 +21,31 @@ Track and notify discount from PS Store
    MAIL_TO=my@gmail.com
    ```
 
-3. migrate tables `./pstore migrate`
+3. migrate tables `./trify migrate`
 
 4. add conjob
 
    ```shell
    # Track PS Store discount
-   5 4 * * 2 /home/myhome/psstore/psstore track:go
+   5 4 * * 2 /home/myhome/trify/trify track:go
    ```
 
 ## Usage
 
+### Supported urls
+* store.playstation.com
+* api-savecoins.nznweb.com.br
+
 ### Add a track
 
 ```shell
- ./psstore track:add https://store.playstation.com/zh-hant-tw/product/HP9000-CUSA07413_00-00000000GODOFWAR
+ ./trify track:add https://store.playstation.com/zh-hant-tw/product/HP9000-CUSA07413_00-00000000GODOFWAR
 ```
 
 ### List tracked
 
 ```shell
- ./psstore track
+ ./trify track
   ---- ------------------------ ------- ----------- --------------------- --------------------- ---------------------------------------------------------------------------------------
   id   title                    price   old_price   updated_at            created_at            url
  ---- ------------------------ ------- ----------- --------------------- --------------------- ---------------------------------------------------------------------------------------
@@ -51,8 +55,8 @@ Track and notify discount from PS Store
 ### Track now
 
 ```shell
-./psstore track:go
-./psstore track
+./trify track:go
+./trify track
  ---- ------------------------ ------- ----------- --------------------- --------------------- ---------------------------------------------------------------------------------------
   id   title                    price   old_price   updated_at            created_at            url
  ---- ------------------------ ------- ----------- --------------------- --------------------- ---------------------------------------------------------------------------------------
@@ -62,7 +66,7 @@ Track and notify discount from PS Store
 ### Del a track
 
 ```shell
-./psstore track:del 1
+./trify track:del 1
 ```
 
 
