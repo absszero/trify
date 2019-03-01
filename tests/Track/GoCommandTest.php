@@ -7,7 +7,7 @@ class GoCommandTest extends \Tests\TestCase
 {
     public function testGo()
     {
-        $url = 'http://example.com/list.html';
+        $url = 'https://store.playstation.com';
         $price = 1234;
         db()->save([
             'url' => $url

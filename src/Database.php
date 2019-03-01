@@ -9,7 +9,7 @@ class Database
     const MYSQL = 'mysql:host=%s;port=%d;dbname=%s';
     const UPDATE = 'UPDATE %s SET %s WHERE %s';
     const INSERT = 'INSERT INTO %s(%s) VALUES(%s)';
-    static public $instance;
+    public static $instance;
     public static function instance()
     {
         if (!self::$instance) {

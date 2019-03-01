@@ -1,15 +1,18 @@
 <?php
-namespace Tests\Track;
+namespace Tests\Parsers;
 
-use Absszero\Trify\Parser;
+use Absszero\Trify\Parsers\Parser;
+use Absszero\Trify\Parsers\SonyPlaystation;
 
-class ParserTest extends \Tests\TestCase
+class SonyPlaystationTest extends \Tests\TestCase
 {
     public function testParse()
     {
-        $bodies = ['url' => $this->body()];
-        $data = Parser::parse($bodies);
-        $this->assertEquals('《FIFA 19》終極版 PS Plus 同捆包 預購', $data['url']->name);
+        $url = 'https://store.playstation.com/zh-hant-hk/product/HP0006-CUSA11810_00-FIFAFOOTBALL2019';
+        $bodies = [$url => $this->body()];
+        $bodies = (new Parser)->parse($bodies);
+
+        $this->assertEquals('《FIFA 19》終極版 PS Plus 同捆包 預購', $bodies[$url]->name);
     }
 
     protected function body()

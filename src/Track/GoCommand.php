@@ -1,6 +1,7 @@
 <?php
 namespace Absszero\Trify\Track;
 
+use Absszero\Trify\Parsers\Parser;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -34,7 +35,7 @@ class GoCommand extends Command
         $urls = array_keys($tracks);
 
         $bodies = $this->crawler->request($urls);
-        $data = \Absszero\Trify\Parser::parse($bodies);
+        $data = (new Parser)->parse($bodies);
         $now = date('Y-m-d H:i:s');
         $observer = new \Absszero\Trify\Observer;
         foreach ($data as $url => $meta) {
