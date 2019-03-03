@@ -42,6 +42,13 @@ Track and notify prices
  ./trify track:add https://store.playstation.com/zh-hant-tw/product/HP9000-CUSA07413_00-00000000GODOFWAR
 ```
 
+### Set target price
+
+```shell
+ ./trify track:target 1 5000
+```
+
+
 ### List tracked
 
 ```shell
