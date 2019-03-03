@@ -31,7 +31,7 @@ class GoCommand extends Command
             $this->crawler = new \Absszero\Trify\Crawler;
         }
 
-        $tracks = db()->get(['url', 'id', 'price'], \PDO::FETCH_GROUP|\PDO::FETCH_ASSOC);
+        $tracks = db()->get(['url', 'id', 'price', 'target'], \PDO::FETCH_GROUP|\PDO::FETCH_ASSOC);
         $urls = array_keys($tracks);
 
         $bodies = $this->crawler->request($urls);

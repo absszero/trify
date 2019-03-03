@@ -8,7 +8,8 @@ class Observer
 
     public function watch($track)
     {
-        if ($track['price'] < $track['old_price']) {
+        $price = $track['target'] ?: $track['price'];
+        if ($price < $track['old_price']) {
             $this->tracks[] = $track;
         }
     }
