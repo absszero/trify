@@ -8,7 +8,7 @@ class AddCommandTest extends \Tests\TestCase
         $command = $this->addCommand('Absszero\Trify\Track\AddCommand');
         $input = ['url' => 'http://example.com/add.html'];
         $this->executeCommand($command, $input);
-        $track = db()->select()[0];
+        $track = db()->get()[0];
 
         $this->assertEquals($input['url'], $track['url']);
     }

@@ -106,7 +106,14 @@ class Database
         return self::instance()->lastInsertId();
     }
 
-    public function select($fields = '*', $style = null)
+    public function find($id)
+    {
+        $sth = self::instance()->prepare("SELECT * FROM " . self::TABLE . " WHERE id = ?");
+        $sth->execute([$id]);
+        return $sth->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function get($fields = '*', $style = null)
     {
         $fields = implode(', ', (array)$fields);
         $sth = self::instance()->prepare("SELECT $fields FROM " . self::TABLE);

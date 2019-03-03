@@ -18,8 +18,8 @@ class ListCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $fields = ['id', 'title', 'price', 'old_price', 'updated_at', 'created_at', 'url'];
+        $fields = ['id', 'title', 'target', 'price', 'old_price', 'updated_at', 'created_at', 'url'];
         $io = new SymfonyStyle($input, $output);
-        $io->table($fields, db()->select($fields));
+        $io->table($fields, db()->get($fields));
     }
 }

@@ -12,7 +12,7 @@ class ListCommandTest extends \Tests\TestCase
         $command = $this->addCommand('Absszero\Trify\Track\ListCommand');
         $tester = $this->executeCommand($command);
 
-        $track = db()->select()[0];
+        $track = db()->get()[0];
         $this->assertContains($track['url'], $tester->getDisplay());
     }
 }

@@ -17,7 +17,7 @@ class GoCommandTest extends \Tests\TestCase
         $command = $this->addCommand(new \Absszero\Trify\Track\GoCommand($crawler));
         $tester = $this->executeCommand($command);
 
-        $track = db()->select()[0];
+        $track = db()->get()[0];
         $this->assertEquals($track['price'], $price);
     }
 

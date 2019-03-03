@@ -29,6 +29,7 @@ class MigrationCommand extends Command
   url varchar(2083) NOT NULL,
   price int(10) DEFAULT NULL,
   old_price int(10) DEFAULT NULL,
+  target int(10) DEFAULT NULL,
   created_at datetime DEFAULT NULL,
   updated_at datetime DEFAULT NULL
   %s

@@ -14,6 +14,6 @@ class DelCommandTest extends \Tests\TestCase
             $tester->setInputs(array('yes'));
         });
 
-        $this->assertEmpty(db()->select());
+        $this->assertEmpty(db()->find($id));
     }
 }

@@ -10,7 +10,8 @@ $application->add(new Absszero\Trify\MigrationCommand);
 $application->add(new Absszero\Trify\Track\AddCommand);
 $application->add(new Absszero\Trify\Track\ListCommand);
 $application->add(new Absszero\Trify\Track\DelCommand);
-$application->add(new Absszero\Trify\Track\GoCommand);
+$application->add(new Absszero\Trify\Track\TargetCommand);
+
 $application->add(new Absszero\Trify\TestMailCommand);
 
 $application->run();
