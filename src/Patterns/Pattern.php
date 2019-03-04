@@ -1,8 +1,8 @@
 <?php
 
-namespace Absszero\Trify\Parsers;
+namespace Absszero\Trify\Patterns;
 
-class Parser
+class Pattern
 {
     const HOSTS = [
         'store.playstation.com' => SonyPlaystation::class,
@@ -17,16 +17,6 @@ class Parser
             return new $class;
         }
 
-        throw new \Exception('Parser not found: ' . $host);
-    }
-
-    public function parse(array $bodies)
-    {
-        foreach ($bodies as $url => $body) {
-            $instance = $this->instance($url);
-            $bodies[$url] = $instance->parse($url, $body);
-        }
-
-        return $bodies;
+        throw new \Exception('Pattern not found: ' . $host);
     }
 }

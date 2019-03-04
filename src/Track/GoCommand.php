@@ -1,7 +1,7 @@
 <?php
 namespace Absszero\Trify\Track;
 
-use Absszero\Trify\Parsers\Parser;
+use Absszero\Trify\Parser;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

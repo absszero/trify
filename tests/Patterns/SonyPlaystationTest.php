@@ -1,14 +1,14 @@
 <?php
-namespace Tests\Parsers;
+namespace Tests\Patterns;
 
-use Absszero\Trify\Parsers\SonyPlaystation;
+use Absszero\Trify\Patterns\SonyPlaystation;
 
 class SonyPlaystationTest extends \Tests\TestCase
 {
     public function testParse()
     {
-        $parser = new SonyPlaystation;
-        $meta = $parser->parse('url', $this->body());
+        $pattern = new SonyPlaystation;
+        $meta = $pattern->parse('url', $this->body());
         $this->assertEquals('《FIFA 19》終極版 PS Plus 同捆包 預購', $meta->title);
         $this->assertEquals('3887', $meta->price);
     }

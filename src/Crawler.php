@@ -2,13 +2,12 @@
 
 namespace Absszero\Trify;
 
+use Absszero\Trify\Patterns\Pattern;
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise;
 
 class Crawler
 {
-    const BYTES = 6000;
-
     public $client;
 
     public $options = [];
@@ -28,9 +27,11 @@ class Crawler
 
     public function request($urls)
     {
+        $patterns = [];
         $promises = [];
         foreach ((array)$urls as $url) {
-            $promises[$url] = $this->client->requestAsync('GET', $url, $this->options);
+            $patterns[$url] = $pattern = (new Pattern)->instance($url);
+            $promises[$url] = $this->client->requestAsync($pattern->method(), $url, $pattern->options($this->options));
         }
 
         $results = Promise\settle($promises)->wait();
@@ -40,7 +41,7 @@ class Crawler
             if ('fulfilled' !== $result['state']) {
                 continue;
             }
-            $bodies[$url] = $result['value']->getBody()->read(self::BYTES);
+            $bodies[$url] = $result['value']->getBody()->read($patterns[$url]->bytes());
         }
 
         return $bodies;

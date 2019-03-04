@@ -1,11 +1,15 @@
 <?php
 
-namespace Absszero\Trify\Parsers;
+namespace Absszero\Trify\Patterns;
 
+use Absszero\Trify\Interfaces\Crawlable;
+use Absszero\Trify\Interfaces\Parsable;
 use Absszero\Trify\Meta;
 
-class SonyPlaystation
+class SonyPlaystation implements Parsable, Crawlable
 {
+    const BYTES = 6000;
+
     const START_TAG = '<script type="application/ld+json"';
     const JSON_TAG = '{';
     const END_TAG = '</script>';
@@ -26,5 +30,20 @@ class SonyPlaystation
         $meta->setPrice($data->offers[0]->price);
 
         return $meta;
+    }
+
+    public function method()
+    {
+        return 'GET';
+    }
+
+    public function options(array $default)
+    {
+        return $default;
+    }
+
+    public function bytes()
+    {
+        return self::BYTES;
     }
 }

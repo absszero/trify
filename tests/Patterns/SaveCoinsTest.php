@@ -1,14 +1,14 @@
 <?php
-namespace Tests\Parsers;
+namespace Tests\Patterns;
 
-use Absszero\Trify\Parsers\Savecoins;
+use Absszero\Trify\Patterns\Savecoins;
 
 class SaveCoinsTest extends \Tests\TestCase
 {
     public function testParse()
     {
-        $parser = new Savecoins;
-        $meta = $parser->parse('url', $this->body());
+        $pattern = new Savecoins;
+        $meta = $pattern->parse('url', $this->body());
         $this->assertEquals('Unravel Two', $meta->title);
         $this->assertEquals('616.26', $meta->price);
     }

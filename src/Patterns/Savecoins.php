@@ -1,6 +1,6 @@
 <?php
 
-namespace Absszero\Trify\Parsers;
+namespace Absszero\Trify\Patterns;
 
 use Absszero\Trify\Meta;
 
@@ -15,5 +15,20 @@ class Savecoins
         $meta->setPrice($json->data->price_digital->rawCurrentPrice);
 
         return $meta;
+    }
+
+    public function method()
+    {
+        return 'GET';
+    }
+
+    public function options(array $default)
+    {
+        return $default;
+    }
+
+    public function bytes()
+    {
+        return 6000;
     }
 }

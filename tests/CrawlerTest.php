@@ -15,7 +15,7 @@ class CrawlerTest extends \Tests\TestCase
 
         $handler = HandlerStack::create($mock);
         $crawler = new \Absszero\Trify\Crawler(['handler' => $handler]);
-        $bodies = $crawler->request('http://exmaple.com');
+        $bodies = $crawler->request('https://store.playstation.com');
         foreach ($bodies as $body) {
             $this->assertContains('"@context":"http://schema.org"', $body);
         }
