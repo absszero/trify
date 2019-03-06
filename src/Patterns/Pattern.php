@@ -6,7 +6,8 @@ class Pattern
 {
     const HOSTS = [
         'store.playstation.com' => SonyPlaystation::class,
-        'api-savecoins.nznweb.com.br' => Savecoins::class
+        'api-savecoins.nznweb.com.br' => Savecoins::class,
+        'www.esunbank.com.tw' => Esunbank::class,
     ];
 
     public function instance($url)

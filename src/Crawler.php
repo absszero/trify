@@ -8,6 +8,8 @@ use GuzzleHttp\Promise;
 
 class Crawler
 {
+    const MAX_BYTES = 9999999;
+
     public $client;
 
     public $options = [];
@@ -41,7 +43,8 @@ class Crawler
             if ('fulfilled' !== $result['state']) {
                 continue;
             }
-            $bodies[$url] = $result['value']->getBody()->read($patterns[$url]->bytes());
+            $size = $patterns[$url]->bytes() ?: self::MAX_BYTES;
+            $bodies[$url] = $result['value']->getBody()->read($size);
         }
 
         return $bodies;

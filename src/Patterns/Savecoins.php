@@ -29,6 +29,6 @@ class Savecoins
 
     public function bytes()
     {
-        return 6000;
+        return 0;
     }
 }
